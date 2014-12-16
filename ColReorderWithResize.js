@@ -503,7 +503,7 @@
                var bDone = false;
                this.s.dt.aoDrawCallback.push({
                   "fn": function () {
-                     if (!that.s.dt._bInitComplete && !bDone) {
+                     if (that.s.dt._bInitComplete != undefined && !that.s.dt._bInitComplete && !bDone) {
                         bDone = true;
                         if(aiOrder)
                         {
@@ -797,6 +797,8 @@
       */
       "_fnMouseMove": function (e, colResized) {
          var that = this;
+	     var table_id = this.s.dt.nTable.id;
+	     var table_id_sel = " #" + table_id;
          ////////////////////
          //Martin Marchetta: Determine if ScrollX is enabled
          var scrollXEnabled;
@@ -804,9 +806,9 @@
          scrollXEnabled = this.s.dt.oInit.sScrollX === "" ? false : true;
 
          //Keep the current table's width (used in case sScrollX is enabled to resize the whole table, giving an Excel-like behavior)
-         if (this.table_size < 0 && scrollXEnabled && $('div.dataTables_scrollHead', this.s.dt.nTableWrapper) != undefined) {
-            if ($('div.dataTables_scrollHead', this.s.dt.nTableWrapper).length > 0)
-               this.table_size = $($('div.dataTables_scrollHead', this.s.dt.nTableWrapper)[0].childNodes[0].childNodes[0]).width();
+         if (this.table_size < 0 && scrollXEnabled && $('div.dataTables_scrollHead' + table_id_sel, this.s.dt.nTableWrapper) != undefined) {
+            if ($('div.dataTables_scrollHead' + table_id_sel, this.s.dt.nTableWrapper).length > 0)
+               this.table_size = $($('div.dataTables_scrollHead' + table_id_sel, this.s.dt.nTableWrapper)[0].childNodes[0].childNodes[0]).width();
          }
          ////////////////////
 
@@ -820,19 +822,20 @@
             $(nTh).width(this.s.mouse.startWidth + moveLength);
 
             //Martin Marchetta: Resize the header too (if sScrollX is enabled)
-            if (scrollXEnabled && $('div.dataTables_scrollHead', this.s.dt.nTableWrapper) != undefined) {
-               if ($('div.dataTables_scrollHead', this.s.dt.nTableWrapper).length > 0)
-                  $($('div.dataTables_scrollHead', this.s.dt.nTableWrapper)[0].childNodes[0].childNodes[0]).width(this.table_size + moveLength);
+            if (scrollXEnabled && $('div.dataTables_scrollHead' + table_id_sel, this.s.dt.nTableWrapper) != undefined) {
+               if ($('div.dataTables_scrollHead' + table_id_sel, this.s.dt.nTableWrapper).length > 0)
+                  $($('div.dataTables_scrollHead' + table_id_sel, this.s.dt.nTableWrapper)[0].childNodes[0].childNodes[0]).width(this.table_size + moveLength);
             }
 
             ////////////////////////
             //Martin Marchetta: Fixed col resizing when the scroller is enabled.
             var visibleColumnIndex;
             //First determine if this plugin is being used along with the smart scroller...
-            if ($('div.dataTables_scrollBody') != null) {
+
+            if ($('div.dataTables_scrollBody' + table_id_sel) != null) {
                //...if so, when resizing the header, also resize the table's body (when enabling the Scroller, the table's header and
                //body are split into different tables, so the column resizing doesn't work anymore)
-               if ($('div.dataTables_scrollBody').length > 0) {
+               if ($('div.dataTables_scrollBody' + table_id_sel).length > 0) {
                   //Since some columns might have been hidden, find the correct one to resize in the table's body
                   var currentColumnIndex;
                   visibleColumnIndex = -1;
@@ -850,7 +853,7 @@
                   }
 
                   //Get the scroller's div
-                  tableScroller = $('div.dataTables_scrollBody', this.s.dt.nTableWrapper)[0];
+                  tableScroller = $('div.dataTables_scrollBody' + table_id_sel, this.s.dt.nTableWrapper)[0];
 
                   //Get the table
                   // BHL 
