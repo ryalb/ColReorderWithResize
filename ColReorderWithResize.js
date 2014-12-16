@@ -503,7 +503,7 @@
                var bDone = false;
                this.s.dt.aoDrawCallback.push({
                   "fn": function () {
-                     if (that.s.dt._bInitComplete != undefined && !that.s.dt._bInitComplete && !bDone) {
+                     if (that.s != undefined && that.s.dt._bInitComplete != undefined && !that.s.dt._bInitComplete && !bDone) {
                         bDone = true;
                         if(aiOrder)
                         {
