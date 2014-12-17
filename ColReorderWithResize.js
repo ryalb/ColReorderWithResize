@@ -1067,6 +1067,8 @@
             this.dom.drag.style.width = $('th:eq(' + that.s.mouse.targetIndex + ')', that.s.dt.nTHead).outerWidth() + "px";
             this.dom.drag.style.backgroundColor = "#DDDDDD";
             this.dom.drag.style.border = "2px solid #C3C3C3";
+            this.dom.drag.style.fontFamily = "myriad-bold";
+            this.dom.drag.style.textAlign = "center";
 
             this.dom.pointer = document.createElement('div');
             this.dom.pointer.className = "DTCR_pointer";
