@@ -818,7 +818,10 @@
                 if (moveLength != 0 && !scrollXEnabled) {
                     $(nThNext).width(this.s.mouse.nextStartWidth - moveLength);
                 }
-                $(nTh).width(this.s.mouse.startWidth + moveLength);
+	        var MIN_WIDTH = 20;
+	        var newW = this.s.mouse.startWidth + moveLength;
+	        var finalW = newW >= MIN_WIDTH ? newW : MIN_WIDTH;
+                $(nTh).width(finalW);
 
                 //Martin Marchetta: Resize the header too (if sScrollX is enabled)
                 if (scrollXEnabled && $('div.dataTables_scrollHead' + table_id_sel, this.s.dt.nTableWrapper) != undefined) {
