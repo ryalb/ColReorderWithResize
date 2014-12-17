@@ -1094,20 +1094,55 @@
          *  @private
          */
         "_fnDestroy": function () {
-            for (var i = 0, iLen = ColReorder.aoInstances.length; i < iLen; i++) {
-                if (ColReorder.aoInstances[i] === this) {
-                    ColReorder.aoInstances.splice(i, 1);
-                    break;
-                }
-            }
+	        for (var i = 0, iLen = ColReorder.aoInstances.length; i < iLen; i++) {
+		        if (ColReorder.aoInstances[i] === this) {
+			        ColReorder.aoInstances.splice(i, 1);
+			        break;
+		        }
+	        }
 
-            $(this.s.dt.nTHead).find('*').unbind('.ColReorder');
+	        if(isNotEmpty(this) &&
+		        isNotEmpty(this.s) &&
+		        isNotEmpty(this.s.dt) &&
+		        isNotEmpty(this.s.dt.nTHead)) {
 
-            this.s.dt.oInstance._oPluginColReorder = null;
-            this.s = null;
+		        $(this.s.dt.nTHead).find('*').unbind('.ColReorder');
+
+	        } else if(isNotEmpty(this) &&
+		        isNotEmpty(this.s) &&
+		        isNotEmpty(this.s.nTHead)){
+
+		        $(this.s.nTHead).find('*').unbind('.ColReorder');
+
+	        }
+
+	        if(isNotEmpty(this) &&
+		        isNotEmpty(this.s) &&
+		        isNotEmpty(this.s.dt) &&
+		        isNotEmpty(this.s.dt.oInstance) &&
+		        isNotEmpty(this.s.dt.oInstance._oPluginColReorder)) {
+
+		        this.s.dt.oInstance._oPluginColReorder = null;
+
+	        } else if(isNotEmpty(this) &&
+		        isNotEmpty(this.s) &&
+		        isNotEmpty(this.s.oInstance) &&
+		        isNotEmpty(this.s.oInstance._oPluginColReorder)){
+
+		        this.s.oInstance._oPluginColReorder = null;
+
+	        }
+
+	        this.s = null;
         }
     };
 
+	function isNotEmpty(element){
+		return (element != null &&
+			element != undefined &&
+			$(element) != null &&
+			$(element) != undefined);
+	}
 
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
      * Static parameters
