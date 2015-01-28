@@ -502,16 +502,28 @@
                     var bDone = false;
                     this.s.dt.aoDrawCallback.push({
                         "fn": function () {
-                            if (that.s != undefined && that.s.dt._bInitComplete != undefined && !that.s.dt._bInitComplete && !bDone) {
+
+                            if ( !that.s.dt._bInitComplete && !bDone ) {
                                 bDone = true;
-                                if (aiOrder) {
-                                    var resort = fnInvertKeyValues(aiOrder);
-                                    that._fnOrderColumns.call(that, resort);
-                                }
+                                var resort = fnInvertKeyValues( aiOrder );
+                                that._fnOrderColumns.call( that, resort );
+                            }
+                            
+                            if (that.s != undefined && that.s.dt._bInitComplete != undefined && !that.s.dt._bInitComplete && !bDone) {
+
+                                //bDone = true;
+                                //
+                                //if (aiOrder) {
+                                //    var resort = fnInvertKeyValues(aiOrder);
+                                //    that._fnOrderColumns.call(that, resort);
+                                //}
+
                                 if (asSizes) {
                                     that._fnResizeColumns.call(that);
                                 }
+
                             }
+
                         },
                         "sName": "ColReorder_Pre"
                     });
