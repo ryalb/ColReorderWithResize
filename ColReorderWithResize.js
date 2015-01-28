@@ -504,19 +504,13 @@
                         "fn": function () {
 
                             if ( !that.s.dt._bInitComplete && !bDone ) {
-                                bDone = true;
-                                var resort = fnInvertKeyValues( aiOrder );
-                                that._fnOrderColumns.call( that, resort );
-                            }
-                            
-                            if (that.s != undefined && that.s.dt._bInitComplete != undefined && !that.s.dt._bInitComplete && !bDone) {
 
-                                //bDone = true;
-                                //
-                                //if (aiOrder) {
-                                //    var resort = fnInvertKeyValues(aiOrder);
-                                //    that._fnOrderColumns.call(that, resort);
-                                //}
+                                bDone = true;
+
+                                if (aiOrder) {
+                                    var resort = fnInvertKeyValues(aiOrder);
+                                    that._fnOrderColumns.call(that, resort);
+                                }
 
                                 if (asSizes) {
                                     that._fnResizeColumns.call(that);
