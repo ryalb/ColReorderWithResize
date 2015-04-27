@@ -503,7 +503,7 @@
                     this.s.dt.aoDrawCallback.push({
                         "fn": function () {
 
-                            if ( !that.s.dt._bInitComplete && !bDone ) {
+                            if ( that.s != null && !that.s.dt._bInitComplete && !bDone ) {
 
                                 bDone = true;
 
