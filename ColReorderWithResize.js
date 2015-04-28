@@ -647,11 +647,13 @@
                     oState.ColReorder.push(iOrigColumn);
 
                     /* Column Sizes */
-                    var size = parseInt(oSettings.aoColumns[i].sWidth.replace("px", ""));
-                    if ( size > 50) {
-                        oState.ColSizes[iOrigColumn] = (size - 30) + "px";
-                    } else {
-                        oState.ColSizes[iOrigColumn] = oSettings.aoColumns[i].sWidth;
+                    if (oSettings.aoColumns[i].sWidth != null) {
+                        var size = parseInt(oSettings.aoColumns[i].sWidth.replace("px", ""));
+                        if (size > 50) {
+                            oState.ColSizes[iOrigColumn] = (size - 30) + "px";
+                        } else {
+                            oState.ColSizes[iOrigColumn] = oSettings.aoColumns[i].sWidth;
+                        }
                     }
 
                 }
