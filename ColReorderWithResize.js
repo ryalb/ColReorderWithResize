@@ -873,7 +873,7 @@
                         if (moveLength != 0 && !scrollXEnabled) {
                             $($(scrollingTableHead)[0].childNodes[visibleColumnIndex + 1]).width(this.s.mouse.nextStartWidth - moveLength);
                         }
-                        $($(scrollingTableHead)[0].childNodes[visibleColumnIndex]).width(this.s.mouse.startWidth + moveLength);
+                        $($(scrollingTableHead)[0].childNodes[visibleColumnIndex]).width(finalW);
 
                         //Resize the table too
                         if (scrollXEnabled) {
