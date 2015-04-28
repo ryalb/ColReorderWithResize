@@ -503,7 +503,7 @@
                     this.s.dt.aoDrawCallback.push({
                         "fn": function () {
 
-                            if ( that.s != null && !that.s.dt._bInitComplete && !bDone ) {
+                            if (that.s != null && !that.s.dt._bInitComplete && !bDone) {
 
                                 bDone = true;
 
@@ -647,7 +647,12 @@
                     oState.ColReorder.push(iOrigColumn);
 
                     /* Column Sizes */
-                    oState.ColSizes[iOrigColumn] = oSettings.aoColumns[i].sWidth;
+                    var size = parseInt(oSettings.aoColumns[i].sWidth.replace("px", ""));
+                    if ( size > 50) {
+                        oState.ColSizes[iOrigColumn] = (size - 30) + "px";
+                    } else {
+                        oState.ColSizes[iOrigColumn] = oSettings.aoColumns[i].sWidth;
+                    }
 
                 }
             }
@@ -824,9 +829,9 @@
                 if (moveLength != 0 && !scrollXEnabled) {
                     $(nThNext).width(this.s.mouse.nextStartWidth - moveLength);
                 }
-	        var MIN_WIDTH = 20;
-	        var newW = this.s.mouse.startWidth + moveLength;
-	        var finalW = newW >= MIN_WIDTH ? newW : MIN_WIDTH;
+                var MIN_WIDTH = 20;
+                var newW = this.s.mouse.startWidth + moveLength;
+                var finalW = newW >= MIN_WIDTH ? newW : MIN_WIDTH;
                 $(nTh).width(finalW);
 
                 //Martin Marchetta: Resize the header too (if sScrollX is enabled)
@@ -1103,55 +1108,55 @@
          *  @private
          */
         "_fnDestroy": function () {
-	        for (var i = 0, iLen = ColReorder.aoInstances.length; i < iLen; i++) {
-		        if (ColReorder.aoInstances[i] === this) {
-			        ColReorder.aoInstances.splice(i, 1);
-			        break;
-		        }
-	        }
+            for (var i = 0, iLen = ColReorder.aoInstances.length; i < iLen; i++) {
+                if (ColReorder.aoInstances[i] === this) {
+                    ColReorder.aoInstances.splice(i, 1);
+                    break;
+                }
+            }
 
-	        if(isNotEmpty(this) &&
-		        isNotEmpty(this.s) &&
-		        isNotEmpty(this.s.dt) &&
-		        isNotEmpty(this.s.dt.nTHead)) {
+            if (isNotEmpty(this) &&
+                isNotEmpty(this.s) &&
+                isNotEmpty(this.s.dt) &&
+                isNotEmpty(this.s.dt.nTHead)) {
 
-		        $(this.s.dt.nTHead).find('*').unbind('.ColReorder');
+                $(this.s.dt.nTHead).find('*').unbind('.ColReorder');
 
-	        } else if(isNotEmpty(this) &&
-		        isNotEmpty(this.s) &&
-		        isNotEmpty(this.s.nTHead)){
+            } else if (isNotEmpty(this) &&
+                isNotEmpty(this.s) &&
+                isNotEmpty(this.s.nTHead)) {
 
-		        $(this.s.nTHead).find('*').unbind('.ColReorder');
+                $(this.s.nTHead).find('*').unbind('.ColReorder');
 
-	        }
+            }
 
-	        if(isNotEmpty(this) &&
-		        isNotEmpty(this.s) &&
-		        isNotEmpty(this.s.dt) &&
-		        isNotEmpty(this.s.dt.oInstance) &&
-		        isNotEmpty(this.s.dt.oInstance._oPluginColReorder)) {
+            if (isNotEmpty(this) &&
+                isNotEmpty(this.s) &&
+                isNotEmpty(this.s.dt) &&
+                isNotEmpty(this.s.dt.oInstance) &&
+                isNotEmpty(this.s.dt.oInstance._oPluginColReorder)) {
 
-		        this.s.dt.oInstance._oPluginColReorder = null;
+                this.s.dt.oInstance._oPluginColReorder = null;
 
-	        } else if(isNotEmpty(this) &&
-		        isNotEmpty(this.s) &&
-		        isNotEmpty(this.s.oInstance) &&
-		        isNotEmpty(this.s.oInstance._oPluginColReorder)){
+            } else if (isNotEmpty(this) &&
+                isNotEmpty(this.s) &&
+                isNotEmpty(this.s.oInstance) &&
+                isNotEmpty(this.s.oInstance._oPluginColReorder)) {
 
-		        this.s.oInstance._oPluginColReorder = null;
+                this.s.oInstance._oPluginColReorder = null;
 
-	        }
+            }
 
-	        this.s = null;
+            this.s = null;
         }
     };
 
-	function isNotEmpty(element){
-		return (element != null &&
-			element != undefined &&
-			$(element) != null &&
-			$(element) != undefined);
-	}
+    function isNotEmpty(element) {
+        return (element != null &&
+        element != undefined &&
+        $(element) != null &&
+        $(element) != undefined);
+    }
 
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
      * Static parameters
