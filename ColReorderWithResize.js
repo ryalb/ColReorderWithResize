@@ -879,7 +879,8 @@
 
                         //Resize the table too
                         if (scrollXEnabled) {
-                            $($(tableScroller)[0].childNodes[0]).width(this.table_size + moveLength);
+                            $($(tableScroller)[0]).width(this.table_size + moveLength);
+                            $($(tableScroller).closest('.dataTables_scroll').find('.dataTables_scrollHead table')[0]).width(this.table_size + moveLength);
                         }
                     }
                 }
